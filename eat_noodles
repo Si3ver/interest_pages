@@ -1,0 +1,65 @@
+<style>
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+#light {
+    display: none;
+} 
+#main {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    color: #000;
+    transition: all .5s;
+}
+#light:checked + #main {
+    background-color: #000;
+    color: #fff;
+}
+.pic {
+    float: left;
+    margin-right: 20px;
+}
+.content {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+#lightButton {
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    cursor: pointer;
+    background: red;
+}
+#light:checked+#main #lightButton {
+    background: green;
+}
+</style>
+
+<input id="light" type="checkbox"></input>
+<div id="main">
+  <div class="pic">
+    <img src="https://p4.ssl.qhimg.com/t01e932bf06236f564f.jpg">
+  </div>
+  <div class="content">
+    <pre>
+        今天回到家，
+        煮了点面吃，
+        一边吃面一边哭，
+        泪水滴落在碗里，
+        没有开灯。
+    </pre>
+  </div>
+  <label for="light">
+    <span id="lightButton"> </span>
+  <label>
+</div>

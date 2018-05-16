@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UI组件设计-轮播图</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div id="my-slider" class="slider-list">
+        <ul>
+            <li class="slider-list__item--selected">
+                <img src="img/img1.png" alt="slider1">
+            </li>
+            <li class="slider-list__item">
+                <img src="img/img2.jpg" alt="slider2">
+            </li>
+            <li class="slider-list__item">
+                <img src="img/img3.jpg" alt="slider3">
+            </li>
+            <li class="slider-list__item">
+                <img src="img/img4.jpg" alt="slider4">
+            </li>
+        </ul>
+        <a class="slider-list__next"></a>
+        <a class="slider-list__previous"></a>
+        <div class="slider-list__control">
+            <span class="slider-list__control-buttons--selected"></span>
+            <span class="slider-list__control-buttons"></span>
+            <span class="slider-list__control-buttons"></span>
+            <span class="slider-list__control-buttons"></span>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

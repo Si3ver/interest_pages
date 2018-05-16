@@ -94,7 +94,6 @@ const pluginController = {
             });
             slider.container.addEventListener('slide', evt=>{
                 const idx = evt.detail.index;
-                console.log(idx);
                 const selected = controller.querySelector('.slider-list__control-buttons--selected');
                 if(selected){
                     selected.className = 'slider-list__control-buttons';

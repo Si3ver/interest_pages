@@ -1,11 +1,31 @@
 class Slider{
-    constructor(id, cycle = 3000){
+    constructor(id, opts = {images:[], cycle:3000}){
         this.container = document.getElementById(id);
+        this.options = opts;
+        this.container.innerHTML = this.render();
         this.items = this.container.querySelectorAll('.slider-list__item, .slider-list__item--selected');
-        this.cycle = cycle;
+        this.cycle = opts.cycle || 3000;
+        this.slideTo(0);
+    }
+    render(){
+        const images = this.options.images;
+        const content = images.map(image=>`
+            <li class="slider-list__item">
+                <img src="${image}" />
+            </li>
+        `.trim());
+
+        return `<ul>${content.join("")}</ul>`;
     }
     registerPlugins(...plugins){
-        plugins.forEach(plugin => plugin(this));
+        plugins.forEach(plugin => {
+            const pluginContainer = document.createElement('div');
+            pluginContainer.className = 'slider-list__plugin';
+            pluginContainer.innerHTML = plugin.render(this.options.images);
+      this.container.appendChild(pluginContainer);
+
+            plugin.action(this);
+        });
     }
     getSelectedItem(){
         const selected = this.container.querySelector('.slider-list__item--selected');
@@ -47,56 +67,79 @@ class Slider{
     }
 }
 
-function pluginController(slider){
-    const controller = slider.container.querySelector('.slider-list__control');
-    if(controller){
-        const buttons = controller.querySelectorAll('.slider-list__control-buttons, .slider-list__control-buttons--selected');
-        controller.addEventListener('mouseover', evt=>{
-            const idx = Array.from(buttons).indexOf(evt.target);
-            if(idx >= 0){
-                slider.slideTo(idx);
+const pluginController = {
+    render(images){
+        return `
+          <div class="slider-list__control">
+            ${images.map((image, i) => `
+                <span class="slider-list__control-buttons${i===0?'--selected':''}"></span>
+             `).join('')}
+          </div>    
+        `.trim();
+
+    },
+    action(slider){
+        const controller = slider.container.querySelector('.slider-list__control');
+        if(controller){
+            const buttons = controller.querySelectorAll('.slider-list__control-buttons, .slider-list__control-buttons--selected');
+            controller.addEventListener('mouseover', evt=>{
+                const idx = Array.from(buttons).indexOf(evt.target);
+                if(idx >= 0){
+                    slider.slideTo(idx);
+                    slider.stop();
+                }
+            });
+            controller.addEventListener('mouseout', evt=>{
+                slider.start();
+            });
+            slider.container.addEventListener('slide', evt=>{
+                const idx = evt.detail.index;
+                console.log(idx);
+                const selected = controller.querySelector('.slider-list__control-buttons--selected');
+                if(selected){
+                    selected.className = 'slider-list__control-buttons';
+                }
+                buttons[idx].className = 'slider-list__control-buttons--selected';
+            });
+        }
+    }
+};
+
+const pluginPrevious = {
+    render(){
+        return `<a class="slider-list__previous"></a>`;
+    },
+    action(slider){
+        const previous = slider.container.querySelector('.slider-list__previous');
+        if(previous){
+            previous.addEventListener('click', evt=>{
                 slider.stop();
-            }
-        });
-        controller.addEventListener('mouseout', evt=>{
-            slider.start();
-        });
-        slider.container.addEventListener('slide', evt=>{
-            const idx = evt.detail.index;
-            console.log(idx);
-            const selected = controller.querySelector('.slider-list__control-buttons--selected');
-            if(selected){
-                selected.className = 'slider-list__control-buttons';
-            }
-            buttons[idx].className = 'slider-list__control-buttons--selected';
-        });
+                slider.slidePrevious();
+                slider.start();
+                evt.preventDefault();
+            });
+        }
     }
 }
 
-function pluginPrevious(slider){
-    const previous = slider.container.querySelector('.slider-list__previous');
-    if(previous){
-        previous.addEventListener('click', evt=>{
-            slider.stop();
-            slider.slidePrevious();
-            slider.start();
-            evt.preventDefault();
-        });
+const pluginNext = {
+    render(){
+        return `<a class="slider-list__next"></a>`;
+    },
+    action(slider){
+        const next = slider.container.querySelector('.slider-list__next');
+        if(next){
+            next.addEventListener('click', evt=>{
+                slider.stop();
+                slider.slideNext();
+                slider.start();
+                evt.preventDefault();
+            });
+        }
     }
 }
 
-function pluginNext(){
-    const next = slider.container.querySelector('.slider-list__next');
-    if(next){
-        next.addEventListener('click', evt=>{
-            slider.stop();
-            slider.slideNext();
-            slider.start();
-            evt.preventDefault();
-        });
-    }
-}
+const slider = new Slider('my-slider', {images:['img/img1.png','img/img2.jpg','img/img3.jpg','img/img4.jpg'], cycle:3000});
 
-const slider = new Slider('my-slider');
 slider.registerPlugins(pluginController, pluginPrevious, pluginNext);
 slider.start();

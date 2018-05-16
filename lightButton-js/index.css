@@ -1,0 +1,33 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+#main {
+    width: 100%;
+    height: 100%;
+    transition: all .5s;
+}
+#main.light-off{
+    color: white;
+    background-color: black;
+}
+#main.light-on{
+    color: black;
+    background-color: white;
+}
+#lightButton {
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+}
+.light-on #lightButton{
+    background: red;
+}
+.light-off #lightButton{
+    background: green;
+}

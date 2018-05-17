@@ -27,3 +27,9 @@ plugin
 + `pluginController()`
 + `pluginPrevious()`
 + `pluginNext()`
+
+**告白小人**异步请求数据
+
+- [在线演示](https://si3ver.github.io/interest_pages/gaobai/index.html)
+
+> axios.js 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中 [文档](https://www.kancloud.cn/yunye/axios/234845)

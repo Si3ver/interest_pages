@@ -5,5 +5,4 @@ submitBtn.onclick = async function(evt) {
     
     let {data} = await axios.get(api + t.value);
     gaobai.src = 'data:image/jpeg;base64,' + data.data;
-    console.log('data:image/jped;base64,' + data.data);
 };

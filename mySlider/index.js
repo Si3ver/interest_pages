@@ -1,31 +1,39 @@
-class Slider{
-    constructor(id, opts = {images:[], cycle:3000}){
+/* 组件模型 */
+class Component {
+    constructor(id, opts = {data:[]}){
         this.container = document.getElementById(id);
         this.options = opts;
-        this.container.innerHTML = this.render();
+        this.container.innerHTML = this.render(opts.data);
+    }
+    registerPlugins(...plugins){
+        plugins.forEach(plugin => {
+            const pluginContainer = document.createElement('div');
+            pluginContainer.className = 'slider-list__plugin';
+            pluginContainer.innerHTML = plugin.render(this.options.data);
+      this.container.appendChild(pluginContainer);
+            plugin.action(this);
+        });
+    }
+    render(data) {
+        return '';
+    }
+}
+
+class Slider extends Component{
+    constructor(id, opts = {data: [], cycle: 3000}){
+        super(id, opts);
         this.items = this.container.querySelectorAll('.slider-list__item, .slider-list__item--selected');
         this.cycle = opts.cycle || 3000;
         this.slideTo(0);
     }
-    render(){
-        const images = this.options.images;
-        const content = images.map(image=>`
+    render(data){
+        const content = data.map(image=>`
             <li class="slider-list__item">
                 <img src="${image}" />
             </li>
         `.trim());
 
         return `<ul>${content.join("")}</ul>`;
-    }
-    registerPlugins(...plugins){
-        plugins.forEach(plugin => {
-            const pluginContainer = document.createElement('div');
-            pluginContainer.className = 'slider-list__plugin';
-            pluginContainer.innerHTML = plugin.render(this.options.images);
-      this.container.appendChild(pluginContainer);
-
-            plugin.action(this);
-        });
     }
     getSelectedItem(){
         const selected = this.container.querySelector('.slider-list__item--selected');
@@ -43,7 +51,7 @@ class Slider{
         if(item){
             item.className = 'slider-list__item--selected';
         }
-        // 自定义slide事件
+        // 自定义slide事件 es7
         const detail = {index: idx};
         const event = new CustomEvent('slide', {bubbles: true, detail});
         this.container.dispatchEvent(event);
@@ -76,7 +84,6 @@ const pluginController = {
              `).join('')}
           </div>    
         `.trim();
-
     },
     action(slider){
         const controller = slider.container.querySelector('.slider-list__control');
@@ -138,7 +145,7 @@ const pluginNext = {
     }
 }
 
-const slider = new Slider('my-slider', {images:['img/img1.png','img/img2.jpg','img/img3.jpg','img/img4.jpg'], cycle:3000});
+const slider = new Slider('my-slider', {data:['img/img1.png','img/img2.jpg','img/img3.jpg','img/img4.jpg'], cycle:3000});
 
 slider.registerPlugins(pluginController, pluginPrevious, pluginNext);
 slider.start();

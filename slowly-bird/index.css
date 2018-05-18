@@ -1,0 +1,37 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+.sprite {
+	display: inline-block;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-image: url(img/bird-sprite.png);
+}
+
+.bird0 {
+	width: 86px;
+	height: 60px;
+	background-position: -178px -2px
+}
+
+.bird1 {
+	width: 86px;
+	height: 60px;
+	background-position: -90px -2px
+}
+
+.bird2 {
+	width: 86px;
+	height: 60px;
+	background-position: -2px -2px
+}
+
+#bird {
+	position: absolute;
+	left: 100px;
+	top: 100px;
+	transform: scale(0.5);
+	transform-origin: -50% -50%;
+}

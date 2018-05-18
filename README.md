@@ -42,3 +42,7 @@ plugin
 
 - [在线演示](https://si3ver.github.io/interest_pages/throttle-btn/index.html)
 
+**呆萌的小鸟**
+- [在线演示](https://si3ver.github.io/interest_pages/slowly-bird/index.html)
+
+tips: debounce()函数，设置事件触发空档期。

@@ -1,0 +1,53 @@
+.outer {
+	width:300px;
+	height:450px;
+	border:3px solid black;
+	float:left;
+}
+#box {
+	width:70px;
+	height:15px;
+	background-color:#52C6F3;
+	position:absolute;
+	bottom:5px;
+	left:110px;
+}
+.ball {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	background-color:rgb(5, 148, 103);
+	display:none
+}
+.outer {
+	position:relative;
+}
+.ball {
+	position:absolute;
+}
+.kongzhi {
+	height:450px;
+	width:110px;
+	float:left;
+	margin-left:10px;
+}
+button {
+	border-radius:10px;
+	height:25px;
+	width:60px;
+}
+#df {
+	position:absolute;
+	top:150px;
+	width:300px;
+	display:none
+}
+h1 {
+	background-color:black;
+	color:white;
+	text-align:center;
+}
+#df h3 {
+	text-align:center;
+	color:rgb(255, 119, 0);
+}

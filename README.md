@@ -28,8 +28,17 @@ plugin
 + `pluginPrevious()`
 + `pluginNext()`
 
-**告白小人**异步请求数据
+**告白小人** - 异步请求数据
 
 - [在线演示](https://si3ver.github.io/interest_pages/gaobai/index.html)
 
 > axios.js 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中 [文档](https://www.kancloud.cn/yunye/axios/234845)
+
+**小球游戏** - （直接操作DOM树，非canvas版）
+
+- [在线演示](https://si3ver.github.io/interest_pages/ball-game/index.html)
+
+**节流的按钮**🔘
+
+- [在线演示](https://si3ver.github.io/interest_pages/throttle-btn/index.html)
+

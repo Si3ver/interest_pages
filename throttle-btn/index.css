@@ -1,0 +1,12 @@
+#circle1, #circle2 {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+    text-align: center;
+    color: #fff;
+    background-color: #f00;
+    cursor: pointer;
+    user-select: none;
+}
